@@ -2,7 +2,7 @@
   hosts: all
   tasks:
     - name: "Install package apache"
-      yum:
+      apt:
         name: "apache2"
         state: "present"
     - name: "Start apache service"
@@ -10,14 +10,9 @@
         name: "apache2"
         state: "started"
         enabled: yes
-    - name: "Allow http connections"
-      firewalld:
-        service: "http"
-        permanent: yes
-        state: enabled
     - name: "Copy test.html"
       copy:
         src: "test.html"
         dest: "/var/www/html"
-        owner: "apache"
-        group: "apache"
+        owner: "root"
+        group: "root"
